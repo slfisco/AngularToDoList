@@ -1,0 +1,10 @@
+<div *ngIf="show">
+     {{task.name}} {{task.id}}
+<span  *ngIf="task.isTaskComplete===true">
+    <input type="checkbox" (click)="changeStatus()" name={{task.id}} checked>
+  </span>
+<span  *ngIf="task.isTaskComplete===false">
+    <input type="checkbox" (click)="changeStatus()" name={{task.id}}>
+  </span>
+<button (click)="deleteTask()">Delete</button>
+</div>

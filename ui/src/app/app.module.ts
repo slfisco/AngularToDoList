@@ -2,12 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RouteExampleComponent } from './route-example/route-example.component';
 
 import { AppService } from './app.service';
 import { AppHttpInterceptorService } from './http-interceptor.service';
+import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
+import { LoginComponent } from './login/login.component';
+import { AppRoutingModule } from './app-routing.module';
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 const routes: Routes = [
   {
@@ -35,16 +40,22 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RouteExampleComponent
+    RouteExampleComponent,
+    ProfileEditorComponent,
+    LoginComponent,
+    TaskListComponent,
+    TaskDetailsComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     HttpClientXsrfModule.withOptions({
       cookieName: 'Csrf-Token',
       headerName: 'Csrf-Token',
     }),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AppRoutingModule
   ],
   providers: [
     AppService,
