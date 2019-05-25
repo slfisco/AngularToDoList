@@ -2,8 +2,6 @@
 <div style="text-align:center;">
   <h1>Task List</h1>
 
-  <h3>jsonString: {{title}}</h3>
-
 <!--  <div class="post-request-test">
     <h3>Test Post Request</h3>
     <button (click)="postData()">ClickMe :)</button>
@@ -24,9 +22,13 @@
     <input type="checkbox" name={{task.id}}>
   </span>
   </li>
-  -->
+
     <input type="text" [formControl]="name">
     {{name.value}}
     <button (click)="updateName()">Update Name</button>
+    -->
 </div>
+<!-- make request to server to see if user is logged in. if not, show login page
+     if logged in, return that task list
+     probably a security risk here...-->
     <router-outlet></router-outlet>

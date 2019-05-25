@@ -1,4 +1,5 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
   <label>
     Username:
     <input type="text" formControlName="username">
@@ -8,7 +9,6 @@
     Password:
     <input type="text" formControlName="password">
   </label>
-  <button type="submit">Log In</button>
+  <button type="submit">Create Account</button>
 </form>
-<button type="button" (click)="goToAccountCreation()">Create Account</button>
 {{postRequestResponse}}

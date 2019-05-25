@@ -1,7 +1,11 @@
-<button (click)="createTaskArray()">array test</button>
-<div class="displayarray">here is array: {{array}}<div>
   Below are values:
   <div *ngFor="let task of array">
     <app-task-details [task]=task></app-task-details>
   </div>
-</div>
+  data: {{title}}
+  Add new task:
+  <form [formGroup]="addTaskForm" (ngSubmit)="createTask()">
+    <input type="text" formControlName="name">
+    <button type="submit">Add Task</button>
+  </form>
+

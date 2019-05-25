@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { RouteExampleComponent } from './route-example/route-example.component';
 
 import { AppService } from './app.service';
 import { AppHttpInterceptorService } from './http-interceptor.service';
@@ -13,23 +12,9 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 const routes: Routes = [
-  {
-    path: 'java',
-    component: RouteExampleComponent,
-    data: { technology: 'Java' }
-  },
-  {
-    path: 'play',
-    component: RouteExampleComponent,
-    data: { technology: 'Play' }
-  },
-  {
-    path: 'angular',
-    component: RouteExampleComponent,
-    data: { technology: 'Angular' }
-  },
   {
     path: '**',
     redirectTo: '/play',
@@ -40,11 +25,11 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    RouteExampleComponent,
     ProfileEditorComponent,
     LoginComponent,
     TaskListComponent,
     TaskDetailsComponent,
+    CreateAccountComponent,
   ],
   imports: [
     ReactiveFormsModule,

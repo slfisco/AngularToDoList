@@ -21,10 +21,10 @@ export class AppService {
    * Makes a http get request to retrieve the welcome message from the backend service.
    */
   public getWelcomeMessage() {
-  console.log("getWelcomeMessage has started. Requesting url:" + this.serviceUrl);
-    return this.http.get(this.serviceUrl).pipe(
-      map(response => response)
-    );
+  }
+  public testService(): Observable<any> {
+    console.log("running testService");
+    return this.http.get(this.serviceUrl).pipe(map(response=> response));
   }
 
   /**

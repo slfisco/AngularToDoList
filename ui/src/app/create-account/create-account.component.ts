@@ -4,11 +4,11 @@ import { AppService } from '../app.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-create-account',
+  templateUrl: './create-account.component.html',
+  styleUrls: ['./create-account.component.css']
 })
-export class LoginComponent implements OnInit {
+export class CreateAccountComponent implements OnInit {
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   //on submit, send form to logincontroller
-  //logincontroller determines if username and password is valid
+  //logincontroller determines if the username and password are valid choices
 // if valid, route to tasklist component and display tasks
 // if not valid, flash or something
     public onSubmit(): void {
@@ -29,7 +29,4 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['./task-list']);
       });
     }
-    public goToAccountCreation(): void {
-      this.router.navigate(['./create-account']);
-      }
 }
