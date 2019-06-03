@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-task-details',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TaskDetailsComponent implements OnInit {
   show: boolean = true;
   @Input() task: object;
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,11 @@ export class TaskDetailsComponent implements OnInit {
   }
   public deleteTask(): void {
 //http request to delete task
+  var jsonString = JSON.stringify(this.task);
+  var jsonNode = JSON.parse(jsonString);
+    this.appService.deleteTask(jsonNode.id).subscribe((data: any) => {
+        alert(data.content);
+      });
     alert("task deleted");
     this.show = !this.show;
   }

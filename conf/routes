@@ -15,6 +15,7 @@ POST    /api/postTest               controllers.HomeController.postTest()
 GET    /api/getTestData             controllers.TestDataController.getTestData()
 POST   /api/authenticate            controllers.LoginController.authenticate()
 POST   /api/createAccount           controllers.LoginController.createAccount()
+DELETE /api/deleteTask/:id          controllers.TestDataController.deleteTask(id: Integer)
 
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)
