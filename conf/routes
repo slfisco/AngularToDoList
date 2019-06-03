@@ -13,6 +13,9 @@ POST    /api/postTest               controllers.HomeController.postTest()
 
 #spencer test
 GET    /api/getTestData             controllers.TestDataController.getTestData()
+POST   /api/authenticate            controllers.LoginController.authenticate()
+POST   /api/createAccount           controllers.LoginController.createAccount()
 
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)
+

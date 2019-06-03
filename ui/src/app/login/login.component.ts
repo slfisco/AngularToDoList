@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AppService } from '../app.service';
 import { Router } from '@angular/router';
+import { Login } from '../login';
 
 @Component({
   selector: 'app-login',
@@ -32,4 +33,10 @@ export class LoginComponent implements OnInit {
     public goToAccountCreation(): void {
       this.router.navigate(['./create-account']);
       }
+    public authenticate(): void {
+      var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value)
+      this.appService.authenticate(login).subscribe((data: any) => {
+        alert(data.content);
+      });
+    }
 }
