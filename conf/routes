@@ -13,8 +13,11 @@ POST    /api/postTest               controllers.HomeController.postTest()
 
 #spencer test
 GET    /api/getTestData             controllers.TestDataController.getTestData()
+GET    /api/getTask/:id             controllers.TestDataController.getTask(id: Integer)
 POST   /api/authenticate            controllers.LoginController.authenticate()
 POST   /api/createAccount           controllers.LoginController.createAccount()
+POST   /api/createTask              controllers.TestDataController.createTask()
+PUT    /api/updateStatus/:id        controllers.TestDataController.updateStatus(id: Integer)
 DELETE /api/deleteTask/:id          controllers.TestDataController.deleteTask(id: Integer)
 
 # Serve static assets under public directory

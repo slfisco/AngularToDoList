@@ -16,7 +16,10 @@ export class AppService {
   private dataPostTestUrl = '/api/postTest';
   private loginUrl = '/api/authenticate';
   private createAccountUrl = '/api/createAccount';
+  private createTaskUrl = '/api/createTask';
   private deleteTaskUrl = '/api/deleteTask';
+  private updateStatusUrl = '/api/updateStatus';
+
 
   constructor(private http: HttpClient) {
   }
@@ -46,8 +49,16 @@ export class AppService {
     var jsonString = JSON.stringify(login);
     return this.http.post(this.createAccountUrl, JSON.parse(jsonString));
   }
+  public createTask(taskName: string): Observable<any> {
+    var jsonString = '{\"name\":' + '"' + taskName + '"}'
+    alert(jsonString);
+    return this.http.post(this.createTaskUrl, JSON.parse(jsonString));
+    }
   public deleteTask(id: number): Observable<any> {
     //delete based on id in URL
-    return this.http.delete(this.deleteTaskUrl + "/"  + id)
+    return this.http.delete(this.deleteTaskUrl + "/"  + id);
   }
+  public updateStatus(id: number): Observable<any> {
+    return this.http.put(this.updateStatusUrl + "/" + id);
+    }
 }

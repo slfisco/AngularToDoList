@@ -54,8 +54,5 @@ public class AccountDAO {
         }
     }
     //split to different class?
-    public class AccountValidationResult {
-        public boolean isSuccess;
-        public String errorMessage;
-    }
+
 }

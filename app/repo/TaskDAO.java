@@ -32,7 +32,6 @@ public class TaskDAO {
         Ebean.delete(foundTask); //delete entity
     }
     public Task createTask(Task task) {
-        task.setIsTaskComplete(false);
         task.save();
         return task;
     }

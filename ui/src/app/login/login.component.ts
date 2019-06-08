@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     password: new FormControl(''),
   });
   postRequestResponse: string;
+  errorMessage: string;
   constructor(private router: Router, private appService: AppService) { }
 
   ngOnInit() {
@@ -36,7 +37,12 @@ export class LoginComponent implements OnInit {
     public authenticate(): void {
       var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value)
       this.appService.authenticate(login).subscribe((data: any) => {
-        alert(data.content);
+        if (data.isSuccess) {
+          this.router.navigate(['./task-list']);
+        }
+        else {
+          this.errorMessage = data.errorMessage;
+        };
       });
     }
 }

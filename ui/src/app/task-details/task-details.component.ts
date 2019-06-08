@@ -15,7 +15,12 @@ export class TaskDetailsComponent implements OnInit {
   }
   public changeStatus(): void {
 //http request to change status
-    alert("checkbox status changed");
+  var jsonString = JSON.stringify(this.task);
+  var jsonNode = JSON.parse(jsonString);
+    this.appService.updateStatus(jsonNode.id).subscribe((data: any) => {
+          alert(data.content);
+          });
+     alert("task status changed");
   }
   public deleteTask(): void {
 //http request to delete task

@@ -40,9 +40,12 @@ export class TaskListComponent implements OnInit {
       console.log("creating task");
       //send request to database
       //push response to array
-
+    this.appService.createTask(this.addTaskForm.get("name").value).subscribe((data: any) => {
+        alert("json returned: " + data.content);
+        //var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
+        this.array.push(JSON.parse(data.content));
+      });
       //fake for now
-      var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
-      this.array.push(json);
+      //var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
     }
 }
