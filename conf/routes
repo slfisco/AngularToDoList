@@ -17,7 +17,7 @@ GET    /api/getTask/:id             controllers.TestDataController.getTask(id: I
 POST   /api/authenticate            controllers.LoginController.authenticate()
 POST   /api/createAccount           controllers.LoginController.createAccount()
 POST   /api/createTask              controllers.TestDataController.createTask()
-PUT    /api/updateStatus/:id        controllers.TestDataController.updateStatus(id: Integer)
+PUT    /api/updateStatus            controllers.TestDataController.updateStatus()
 DELETE /api/deleteTask/:id          controllers.TestDataController.deleteTask(id: Integer)
 
 # Serve static assets under public directory

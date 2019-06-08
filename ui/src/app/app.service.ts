@@ -19,6 +19,7 @@ export class AppService {
   private createTaskUrl = '/api/createTask';
   private deleteTaskUrl = '/api/deleteTask';
   private updateStatusUrl = '/api/updateStatus';
+  private getTaskUrl = '/api/getTask';
 
 
   constructor(private http: HttpClient) {
@@ -58,7 +59,8 @@ export class AppService {
     //delete based on id in URL
     return this.http.delete(this.deleteTaskUrl + "/"  + id);
   }
-  public updateStatus(id: number): Observable<any> {
-    return this.http.put(this.updateStatusUrl + "/" + id);
+  public updateStatus(json): Observable<any> {
+        alert(JSON.stringify(json));
+        return this.http.put(this.updateStatusUrl, json);
     }
 }

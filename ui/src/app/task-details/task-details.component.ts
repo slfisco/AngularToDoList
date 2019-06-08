@@ -17,7 +17,7 @@ export class TaskDetailsComponent implements OnInit {
 //http request to change status
   var jsonString = JSON.stringify(this.task);
   var jsonNode = JSON.parse(jsonString);
-    this.appService.updateStatus(jsonNode.id).subscribe((data: any) => {
+    this.appService.updateStatus(jsonNode).subscribe((data: any) => {
           alert(data.content);
           });
      alert("task status changed");

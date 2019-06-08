@@ -53,8 +53,9 @@ public class TestDataController extends Controller{
         JsonNode jsonNode = Json.toJson(new AppSummary("deletion complete"));
         return ok(jsonNode).as("application/json");
     }
-    public Result updateStatus(Integer id) {
-        Task task = taskRepository.getTask(id);
+    public Result updateStatus() {
+        JsonNode json = request().body().asJson();
+        Task task = Json.fromJson(json, Task.class);
         task.setIsTaskComplete((task.isTaskComplete == true) ? (false) : (true));
         JsonNode taskNode = Json.toJson(taskRepository.updateTask(task));
         JsonNode jsonNode = Json.toJson(new AppSummary(Json.stringify(taskNode)));
