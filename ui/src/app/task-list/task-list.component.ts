@@ -48,4 +48,10 @@ export class TaskListComponent implements OnInit {
       //fake for now
       //var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
     }
+    public logOut() {
+    //send request to server to remove session
+    //redirect to login page
+      this.appService.sendLogOut().subscribe();
+      this.router.navigate(['./login']);
+    }
 }

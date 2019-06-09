@@ -20,6 +20,7 @@ export class AppService {
   private deleteTaskUrl = '/api/deleteTask';
   private updateStatusUrl = '/api/updateStatus';
   private getTaskUrl = '/api/getTask';
+  private logOutUrl = '/api/logOut';
 
 
   constructor(private http: HttpClient) {
@@ -62,5 +63,8 @@ export class AppService {
   public updateStatus(json): Observable<any> {
         alert(JSON.stringify(json));
         return this.http.put(this.updateStatusUrl, json);
+    }
+  public sendLogOut(): Observable<any> {
+    return this.http.get(this.logOutUrl);
     }
 }

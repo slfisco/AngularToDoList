@@ -18,36 +18,26 @@ public class LoginController extends Controller {
         this.accountRepository = accountRepository;
     }
     public Result authenticate() {
-        //successful validation should return json for that account
         JsonNode json = request().body().asJson();
         Account account = Json.fromJson(json, Account.class);
-        AccountValidationResult accountValidationResult = new AccountValidationResult();
-        if (accountRepository.loginIsValid(account)) {
+        AccountValidationResult accountValidationResult = accountRepository.loginIsValid(account);
+        if (accountValidationResult.isSuccess) {
             session("username", account.getUsername());
-            accountValidationResult.isSuccess = true;
-            JsonNode jsonNode = Json.toJson(accountValidationResult);
-            return ok(jsonNode).as("application/json");
         }
-        else {
-            accountValidationResult.isSuccess = false;
-            accountValidationResult.errorMessage = "login not valid. please try again";
-            JsonNode jsonNode = Json.toJson(accountValidationResult);
-            return ok(jsonNode).as("application/json");
-        }
+            return ok(Json.toJson(accountValidationResult)).as("application/json");
     }
     public Result createAccount() {
-        //should redirect to task list
         JsonNode json = request().body().asJson();
         Account account = Json.fromJson(json, Account.class);
         AccountValidationResult accountValidationResult = accountRepository.newAccountIsValid(account);
         if (accountValidationResult.isSuccess) {
+            session("username", account.getUsername());
             accountRepository.createAccount(account);
-            JsonNode jsonNode = Json.toJson(new AppSummary("new account is valid and has been added"));
-            return ok(jsonNode).as("application/json");
         }
-        else {
-            JsonNode jsonNode = Json.toJson(new AppSummary(accountValidationResult.errorMessage));
-            return ok(jsonNode).as("application/json");
-        }
+        return ok(Json.toJson(accountValidationResult)).as("application/json");
+    }
+    public Result logOut() {
+        session().clear();
+        return ok();
     }
 }

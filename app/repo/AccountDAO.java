@@ -18,13 +18,13 @@ public class AccountDAO {
         this.ebeanServer = Ebean.getServer(ebeanConfig.defaultServer());
     }
 
-    public boolean loginIsValid(Account account) { //testing account
+    public AccountValidationResult loginIsValid(Account account) { //testing account
         Account foundAccount = ebeanServer.find(Account.class).where().eq("username", account.username).findOne();
         if (foundAccount != null && BCrypt.checkpw(account.password, foundAccount.password)) {
-            return true;
+            return new AccountValidationResult(true);
         }
         else {
-            return false;//would be good to load from config
+            return new AccountValidationResult(false,"Login details not valid. Please try again");
         }
     }
     public void createAccount(Account account) {
@@ -32,25 +32,19 @@ public class AccountDAO {
         account.save();
     }
     public AccountValidationResult newAccountIsValid(Account account) {
-        AccountValidationResult result = new AccountValidationResult();
+
         if (ebeanServer.find(Account.class).where().eq("username", account.username).findOne() != null) {
-            result.isSuccess = false;
-            result.errorMessage = "Error: Username already exists. Please choose another username.";
-            return result;
+            return new AccountValidationResult(false, "Error: Username already exists. Please choose another username.");
         }
         else if (account.username == "") {
-            result.isSuccess = false;
-            result.errorMessage = "Error: Username cannot be blank.";
-            return result;
+            return new AccountValidationResult(false, "Error: Username cannot be blank.");
+
         }
         else if (account.password == "") {
-            result.isSuccess = false;
-            result.errorMessage = "Error: Password cannot be blank.";
-            return result;
+            return new AccountValidationResult(false,"Error: Password cannot be blank.");
         }
         else {
-            result.isSuccess = true;
-            return result;
+            return new AccountValidationResult(true);
         }
     }
     //split to different class?
