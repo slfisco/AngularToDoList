@@ -10,7 +10,7 @@ import { TaskDetailsComponent } from '../task-details/task-details.component';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  title: string;
+  jsonNode: string;
   postRequestResponse: string;
   array: any[];
   addTaskForm = new FormGroup({
@@ -20,16 +20,15 @@ export class TaskListComponent implements OnInit {
     }
 
   ngOnInit() {
-        //on init, get observable of testService. on response, set title to response.content and run createArray
-            this.appService.testService().subscribe(
+            this.appService.getTasks().subscribe(
               response => {
-                this.title = response.content;
+                this.jsonNode = JSON.stringify(response);
                 this.createArray();
                 })
   }
     public createArray() {
       console.log("createArray has been executed");
-      var json = JSON.parse(this.title)
+      var json = JSON.parse(this.jsonNode)
       var array = [];
                   for (var node of json) {
                     array.push(node);
@@ -38,15 +37,11 @@ export class TaskListComponent implements OnInit {
     }
     public createTask() {
       console.log("creating task");
-      //send request to database
-      //push response to array
+
     this.appService.createTask(this.addTaskForm.get("name").value).subscribe((data: any) => {
         alert("json returned: " + data.content);
-        //var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
         this.array.push(JSON.parse(data.content));
       });
-      //fake for now
-      //var json = JSON.parse("{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"}")
     }
     public logOut() {
     //send request to server to remove session

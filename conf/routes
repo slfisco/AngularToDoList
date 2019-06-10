@@ -8,18 +8,15 @@ GET     /                           controllers.FrontendController.index()
 # An example route (Prefix all API routes with apiPrefix defined in application.conf)
 GET     /api/summary                controllers.HomeController.appSummary
 
-# Test post request
-POST    /api/postTest               controllers.HomeController.postTest()
-
 #spencer test
-GET    /api/getTestData             controllers.TestDataController.getTestData()
-GET    /api/getTask/:id             controllers.TestDataController.getTask(id: Integer)
+GET    /api/getTasks             controllers.TaskController.getTasks()
+GET    /api/getTask/:id             controllers.TaskController.getTask(id: Integer)
 GET    /api/logOut                  controllers.LoginController.logOut()
 POST   /api/authenticate            controllers.LoginController.authenticate()
 POST   /api/createAccount           controllers.LoginController.createAccount()
-POST   /api/createTask              controllers.TestDataController.createTask()
-PUT    /api/updateStatus            controllers.TestDataController.updateStatus()
-DELETE /api/deleteTask/:id          controllers.TestDataController.deleteTask(id: Integer)
+POST   /api/createTask              controllers.TaskController.createTask()
+PUT    /api/updateStatus            controllers.TaskController.updateStatus()
+DELETE /api/deleteTask/:id          controllers.TaskController.deleteTask(id: Integer)
 
 # Serve static assets under public directory
 GET     /*file                      controllers.FrontendController.assetOrDefault(file)

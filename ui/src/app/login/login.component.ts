@@ -20,17 +20,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  //on submit, send form to logincontroller
-  //logincontroller determines if username and password is valid
-// if valid, route to tasklist component and display tasks
-// if not valid, flash or something
-    public onSubmit(): void {
-      this.appService.sendData().subscribe((data: any) => {
-        alert("here is how to send form data: " + this.loginForm.get("username").value);
-        this.postRequestResponse = data.content;
-        this.router.navigate(['./task-list']);
-      });
-    }
     public goToAccountCreation(): void {
       this.router.navigate(['./create-account']);
       }

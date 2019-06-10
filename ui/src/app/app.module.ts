@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 import { AppService } from './app.service';
 import { AppHttpInterceptorService } from './http-interceptor.service';
-import { ProfileEditorComponent } from './profile-editor/profile-editor.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileEditorComponent,
     LoginComponent,
     TaskListComponent,
     TaskDetailsComponent,

@@ -12,29 +12,20 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-public class TestDataController extends Controller{
+public class TaskController extends Controller{
 
     private final TaskDAO taskRepository;
 
     @Inject
-    public TestDataController(TaskDAO taskRepository) {
+    public TaskController(TaskDAO taskRepository) {
         this.taskRepository = taskRepository;
     }
-    //supplies json for testing
-    public Result getTestData() {
-        /*
-        String jsonString = "[{\"id\":3,\"name\":\"task1\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/3\",\"updateLink\":\"http://localhost:9000/updateLink/3\",\"deleteLink\":\"http://localhost:9000/delete/3\"},{\"id\":4,\"name\":\"task2\",\"isTaskComplete\":true,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/4\",\"updateLink\":\"http://localhost:9000/updateLink/4\",\"deleteLink\":\"http://localhost:9000/delete/4\"},{\"id\":5,\"name\":\"task3\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/5\",\"updateLink\":\"http://localhost:9000/updateLink/5\",\"deleteLink\":\"http://localhost:9000/delete/5\"},{\"id\":6,\"name\":\"task4\",\"isTaskComplete\":false,\"accountName\":\"testname\",\"link\":\"http://localhost:9000/getTask/6\",\"updateLink\":\"http://localhost:9000/updateLink/6\",\"deleteLink\":\"http://localhost:9000/delete/6\"}]";
-        JsonNode jsonNode = Json.toJson(new AppSummary(jsonString));
-        Logger.error("newController executed");
-        return ok(jsonNode).as("application/json");
-        */
+    public Result getTasks() {
         String username = session("username");
         Logger.error("Rendering task list for " + username);
         List<Task> tasks = taskRepository.getTasks(username);
         Collections.sort(tasks, Comparator.comparing(Task::getId));
-        String jsonString = Json.stringify(Json.toJson(tasks.stream()));
-        JsonNode jsonNode = Json.toJson(new AppSummary(jsonString));
-        return ok(jsonNode).as("application/json");
+        return ok(Json.toJson(tasks.stream())).as("application/json");
     }
     public Result createTask() {
         //should return json of task
