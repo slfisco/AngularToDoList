@@ -18,7 +18,6 @@ export class AppService {
   private createTaskUrl = '/api/createTask';
   private deleteTaskUrl = '/api/deleteTask';
   private updateStatusUrl = '/api/updateStatus';
-  private getTaskUrl = '/api/getTask';
   private logOutUrl = '/api/logOut';
 
 
@@ -26,7 +25,7 @@ export class AppService {
   }
 
   public getTasks(): Observable<any> {
-    return this.http.get(this.getTasksUrl).pipe(map(response=> response));
+    return this.http.get(this.getTasksUrl);
   }
   public authenticate(login: Login): Observable<any> {
     var jsonString = JSON.stringify(login);
@@ -38,18 +37,16 @@ export class AppService {
   }
   public createTask(taskName: string): Observable<any> {
     var jsonString = '{\"name\":' + '"' + taskName + '"}'
-    alert(jsonString);
     return this.http.post(this.createTaskUrl, JSON.parse(jsonString));
-    }
+  }
   public deleteTask(id: number): Observable<any> {
     //delete based on id in URL
     return this.http.delete(this.deleteTaskUrl + "/"  + id);
   }
   public updateStatus(json): Observable<any> {
-        alert(JSON.stringify(json));
-        return this.http.put(this.updateStatusUrl, json);
-    }
+    return this.http.put(this.updateStatusUrl, json);
+  }
   public sendLogOut(): Observable<any> {
     return this.http.get(this.logOutUrl);
-    }
+  }
 }

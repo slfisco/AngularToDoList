@@ -22,7 +22,6 @@ public class TaskController extends Controller{
     }
     public Result getTasks() {
         String username = session("username");
-        Logger.error("Rendering task list for " + username);
         List<Task> tasks = taskRepository.getTasks(username);
         Collections.sort(tasks, Comparator.comparing(Task::getId));
         return ok(Json.toJson(tasks.stream())).as("application/json");
@@ -34,27 +33,22 @@ public class TaskController extends Controller{
         newTask.setName(json.get("name").textValue());
         newTask.setIsTaskComplete(false);
         newTask.setAccountName(session("username"));
-        Logger.error(Json.stringify(Json.toJson(newTask)));
         JsonNode taskNode = Json.toJson(taskRepository.createTask(newTask));
-        JsonNode jsonNode = Json.toJson(new AppSummary(Json.stringify(taskNode)));
-        return ok(jsonNode).as("application/json");
+        return ok(taskNode).as("application/json");
     }
     public Result deleteTask(Integer id) {
         taskRepository.deleteTask(id);
-        JsonNode jsonNode = Json.toJson(new AppSummary("deletion complete"));
-        return ok(jsonNode).as("application/json");
+        return noContent();
     }
     public Result updateStatus() {
         JsonNode json = request().body().asJson();
         Task task = Json.fromJson(json, Task.class);
         task.setIsTaskComplete((task.isTaskComplete == true) ? (false) : (true));
         JsonNode taskNode = Json.toJson(taskRepository.updateTask(task));
-        JsonNode jsonNode = Json.toJson(new AppSummary(Json.stringify(taskNode)));
-        return ok(jsonNode).as("application/json");
+        return ok(taskNode).as("application/json");
     }
     public Result getTask(Integer id) {
         JsonNode taskNode = Json.toJson(taskRepository.getTask(id));
-        JsonNode jsonNode = Json.toJson(new AppSummary(Json.stringify(taskNode)));
-        return ok(jsonNode).as("application/json");
+        return ok(taskNode).as("application/json");
     }
 }

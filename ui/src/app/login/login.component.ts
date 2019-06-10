@@ -20,18 +20,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-    public goToAccountCreation(): void {
-      this.router.navigate(['./create-account']);
+  public goToAccountCreation(): void {
+    this.router.navigate(['./create-account']);
+  }
+  public authenticate(): void {
+    var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value);
+    this.appService.authenticate(login).subscribe((data: any) => {
+      if (data.isSuccess) {
+        this.router.navigate(['./task-list']);
       }
-    public authenticate(): void {
-      var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value)
-      this.appService.authenticate(login).subscribe((data: any) => {
-        if (data.isSuccess) {
-          this.router.navigate(['./task-list']);
-        }
-        else {
-          this.errorMessage = data.errorMessage;
-        };
-      });
-    }
+      else {
+        this.errorMessage = data.errorMessage;
+      }
+    });
+  }
 }

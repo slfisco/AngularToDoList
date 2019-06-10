@@ -20,33 +20,28 @@ export class TaskListComponent implements OnInit {
     }
 
   ngOnInit() {
-            this.appService.getTasks().subscribe(
-              response => {
-                this.jsonNode = JSON.stringify(response);
-                this.createArray();
-                })
+    this.appService.getTasks().subscribe(response => {
+      this.jsonNode = JSON.stringify(response);
+      this.createArray();
+    })
   }
-    public createArray() {
-      console.log("createArray has been executed");
-      var json = JSON.parse(this.jsonNode)
-      var array = [];
-                  for (var node of json) {
-                    array.push(node);
-                }
-                  this.array = array;
+  public createArray() {
+    var json = JSON.parse(this.jsonNode)
+    var array = [];
+    for (var node of json) {
+      array.push(node);
     }
-    public createTask() {
-      console.log("creating task");
-
+    this.array = array;
+  }
+  public createTask() {
     this.appService.createTask(this.addTaskForm.get("name").value).subscribe((data: any) => {
-        alert("json returned: " + data.content);
-        this.array.push(JSON.parse(data.content));
-      });
-    }
-    public logOut() {
+      this.array.push(JSON.parse(JSON.stringify(data)));
+    });
+  }
+  public logOut() {
     //send request to server to remove session
     //redirect to login page
-      this.appService.sendLogOut().subscribe();
-      this.router.navigate(['./login']);
-    }
+    this.appService.sendLogOut().subscribe();
+    this.router.navigate(['./login']);
+  }
 }

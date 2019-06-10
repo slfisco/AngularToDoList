@@ -3,7 +3,7 @@ Below are values:
   <div *ngFor="let task of array">
     <app-task-details [task]=task></app-task-details>
   </div>
-<div class="jsonNode">json: {{jsonNode}}</div>
+<!--<div class="jsonNode">json: {{jsonNode}}</div> -->
   Add new task:
   <form [formGroup]="addTaskForm" (ngSubmit)="createTask()">
     <input type="text" formControlName="name">

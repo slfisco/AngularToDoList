@@ -15,20 +15,19 @@ export class CreateAccountComponent implements OnInit {
     password: new FormControl(''),
   });
   errorMessage: string;
-  postRequestResponse: string;
   constructor(private router: Router, private appService: AppService) { }
 
   ngOnInit() {
   }
-    public createAccount(): void {
-      var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value)
-      this.appService.createAccount(login).subscribe((data: any) => {
-        if (data.isSuccess) {
-                  this.router.navigate(['./task-list']);
-                }
-                else {
-                  this.errorMessage = data.errorMessage;
-                };
-        });
-        }
+  public createAccount(): void {
+    var login = new Login(this.loginForm.get("username").value,this.loginForm.get("password").value)
+    this.appService.createAccount(login).subscribe((data: any) => {
+      if (data.isSuccess) {
+        this.router.navigate(['./task-list']);
+      }
+      else {
+        this.errorMessage = data.errorMessage;
+      };
+    });
+  }
 }

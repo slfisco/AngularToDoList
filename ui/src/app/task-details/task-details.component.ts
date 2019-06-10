@@ -14,22 +14,16 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit() {
   }
   public changeStatus(): void {
-//http request to change status
-  var jsonString = JSON.stringify(this.task);
-  var jsonNode = JSON.parse(jsonString);
-    this.appService.updateStatus(jsonNode).subscribe((data: any) => {
-          alert(data.content);
-          });
-     alert("task status changed");
+    //http request to change status
+    var jsonString = JSON.stringify(this.task);
+    var jsonNode = JSON.parse(jsonString);
+      this.appService.updateStatus(jsonNode).subscribe();
   }
   public deleteTask(): void {
-//http request to delete task
-  var jsonString = JSON.stringify(this.task);
-  var jsonNode = JSON.parse(jsonString);
-    this.appService.deleteTask(jsonNode.id).subscribe((data: any) => {
-        alert(data.content);
-      });
-    alert("task deleted");
+    //http request to delete task
+    var jsonString = JSON.stringify(this.task);
+    var jsonNode = JSON.parse(jsonString);
+    this.appService.deleteTask(jsonNode.id).subscribe();
     this.show = !this.show;
   }
 }

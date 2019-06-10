@@ -47,6 +47,4 @@ public class AccountDAO {
             return new AccountValidationResult(true);
         }
     }
-    //split to different class?
-
 }
